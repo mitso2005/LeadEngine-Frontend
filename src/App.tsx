@@ -10,6 +10,9 @@ function App() {
         <Field placeholder="Head of Data,PMO" variable="titles"/>
         <Field placeholder="10" variable="max_results"/>
       </div>
+      <div className="card">
+        <button onClick={() => alert('Hello world!')}>Find Client Contacts</button>
+      </div>
     </>
   )
 }
