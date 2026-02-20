@@ -30,7 +30,11 @@ const ResultsTable: React.FC<ResultsTableProps> = ({ results }) => (
                             <td className="px-4 py-3">{person.title}</td>
                             <td className="px-4 py-3 font-medium">{person.company}</td>
                             <td className="px-4 py-3">{person.email ?? '—'}</td>
-                            <td className="px-4 py-3">{person.phone ?? '—'}</td>
+                            <td className="px-4 py-3">
+                                {person.phone
+                                    ? <a href={`tel:${person.phone}`} className="text-[#F5AB40] font-medium hover:underline">{person.phone} ↗</a>
+                                    : '—'}
+                            </td>
                             <td className="px-4 py-3">{person.location ?? '—'}</td>
                             <td className="px-4 py-3">
                                 {person.linkedin_url
