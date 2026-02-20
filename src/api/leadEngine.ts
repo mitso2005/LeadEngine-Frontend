@@ -11,8 +11,25 @@ export type EnrichParams = {
 };
 
 // ─── Response ─────────────────────────────────────────────────────────────────
-// Replace this with a typed interface once you know the API response shape.
-export type EnrichResponse = any;
+export type Person = {
+    first_name:   string;
+    last_name:    string;
+    title:        string;
+    company:      string;
+    email:        string | null;
+    phone:        string | null;
+    linkedin_url: string | null;
+    city:         string | null;
+    state:        string | null;
+    country:      string | null;
+    location:     string | null;
+};
+
+export type EnrichResponse = {
+    companies_processed: number;
+    people_found:        number;
+    people:              Person[];
+};
 
 // ─── URL Builder ──────────────────────────────────────────────────────────────
 // Builds the full GET URL from the base URL and provided params.
