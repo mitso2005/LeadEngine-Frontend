@@ -62,7 +62,17 @@ export const enrichContacts = async (params: EnrichParams): Promise<EnrichRespon
     });
 
     if (!res.ok) {
-        throw new Error(`API error: ${res.status} ${res.statusText}`);
+        // ── Custom error messages per status code ──────────────────────────
+        const errorMessages: Record<number, string> = {
+            422: 'Invalid inputs — check that Domains, Titles and Max Results are filled in correctly.',
+            400: 'Bad request — please check your search fields. If the problem persists, contact dimitri.petrakis@peoplebank.com.au or Digital Transformations for assistance.',
+            401: 'Unauthorised — API credentials are missing or invalid. Please contact dimitri.petrakis@peoplebank.com.au or Digital Transformations for assistance.',
+            403: 'Forbidden — you do not have access to this resource. Please contact dimitri.petrakis@peoplebank.com.au or Digital Transformations for assistance.',
+            404: 'Not found — the API endpoint could not be reached. Please contact dimitri.petrakis@peoplebank.com.au or Digital Transformations for assistance.',
+            500: 'Server error — the LeadEngine API is having issues, please contact dimitri.petrakis@peoplebank.com.au or Digital Transformations for assistance.',
+        };
+        const message = errorMessages[res.status] ?? `Unexpected error: ${res.status} ${res.statusText}`;
+        throw new Error(message);
     }
 
     return res.json();
