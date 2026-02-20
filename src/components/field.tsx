@@ -1,24 +1,24 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 type FieldProps = {
-    placeholder?: string; // Optional placeholder prop
-    variable?: string; // Optional variable prop
+    placeholder?: string;
+    variable?: string;
+    value: string;
+    onChange: (value: string) => void;
 };
 
-const Field: React.FC<FieldProps> = ({ placeholder, variable }) => {
-
-    const [value, setValue] = useState<string>('');
+const Field: React.FC<FieldProps> = ({ placeholder, variable, value, onChange }) => {
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setValue(e.target.value);
+        onChange(e.target.value);
     }
 
 
     return (
 
         <div>
-            <label htmlFor="field">{variable}:  </label>
-            <input type="text" id="field" value={value} onChange={handleChange} placeholder={placeholder}/>
+            <label htmlFor={`field-${variable}`}>{variable}: </label>
+            <input type="text" id={`field-${variable}`} value={value} onChange={handleChange} placeholder={placeholder}/>
         </div>
     );
 };
