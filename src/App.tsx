@@ -43,35 +43,36 @@ function App() {
       </header>
 
       <main className="flex-1 flex flex-col items-center justify-start px-6 py-10 gap-8 w-full">
+
+        {/* ── Search form (constrained width) ── */}
         <div className="w-full max-w-3xl flex flex-col gap-8">
+          <section className="w-full bg-white rounded-2xl shadow-sm border border-[#b7cee2] p-8">
+            <h2 className="text-lg font-semibold text-[#051729] mb-6">Search Parameters</h2>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <Field placeholder="commbank.com.au,google.com" variable="Domains" value={domains} onChange={setDomains}/>
+              <Field placeholder="Head of Data, PMO" variable="Titles" value={titles} onChange={setTitles}/>
+              <Field placeholder="10" variable="Max Results" value={maxResults} onChange={setMaxResults}/>
+            </div>
+            <div className="mt-8 flex justify-center">
+              <button
+                onClick={handleFind}
+                disabled={loading}
+                className="bg-[#F5AB40] hover:bg-[#e09730] disabled:opacity-50 text-[#051729] font-bold px-7 py-3 rounded-xl shadow transition-colors duration-200 cursor-pointer text-base tracking-wide"
+              >
+                {loading ? 'Searching…' : 'Find Client Contacts'}
+              </button>
+            </div>
+          </section>
 
-        {/* ── Search form ── */}
-        <section className="w-full bg-white rounded-2xl shadow-sm border border-[#b7cee2] p-8">
-          <h2 className="text-lg font-semibold text-[#051729] mb-6">Search Parameters</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <Field placeholder="commbank.com.au,google.com" variable="Domains" value={domains} onChange={setDomains}/>
-            <Field placeholder="Head of Data, PMO" variable="Titles" value={titles} onChange={setTitles}/>
-            <Field placeholder="10" variable="Max Results" value={maxResults} onChange={setMaxResults}/>
-          </div>
-          <div className="mt-8 flex justify-center">
-            <button
-              onClick={handleFind}
-              disabled={loading}
-              className="bg-[#F5AB40] hover:bg-[#e09730] disabled:opacity-50 text-[#051729] font-bold px-10 py-3 rounded-xl shadow transition-colors duration-200 cursor-pointer text-base tracking-wide"
-            >
-              {loading ? 'Searching…' : 'Find Client Contacts'}
-            </button>
-          </div>
-        </section>
+          {/* ── Error ── */}
+          {error && (
+            <div className="w-full bg-red-50 border border-red-200 text-red-700 rounded-xl px-6 py-4">
+              {error}
+            </div>
+          )}
+        </div>
 
-        {/* ── Error ── */}
-        {error && (
-          <div className="w-full bg-red-50 border border-red-200 text-red-700 rounded-xl px-6 py-4">
-            {error}
-          </div>
-        )}
-
-        {/* ── Results table ── */}
+        {/* ── Results table (full width) ── */}
         {results && (
           <section className="w-full bg-white rounded-2xl shadow-sm border border-[#b7cee2] p-8">
             <h2 className="text-lg font-semibold text-[#051729] mb-1">Results</h2>
@@ -109,7 +110,7 @@ function App() {
             </div>
           </section>
         )}
-        </div>
+
       </main>
     </div>
   )
